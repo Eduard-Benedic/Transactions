@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const path  = require('path')
 
 module.exports = {
@@ -10,14 +11,25 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.(js)$/, use: 'babel-loader' },
-            {test : /\.css$/, use:['style-loader', 'css-loader']}
+           
+            {
+                test: /\.(js)$/,
+                use: 'babel-loader'
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.jpe?g$|\.gif$|\.png$|\.PNG$|\.svg$|\.woff(2)?$|\.ttf$|\.eot$/,
+                loader: "file-loader"
+            }
+           
        ]
    },
     plugins: [new HtmlWebpackPlugin({
-        title: 'Bud Transactions',
-        template: 'public/index.html'
-    }),
-
-    ]
+                title: 'Bud Transactions',
+                    template: 'public/index.html'
+                })
+            ]
 }

@@ -6,6 +6,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPoundSign, faMinus } from '@fortawesome/free-solid-svg-icons'
 
 
+
+const TransactionRow = styled.tr`
+     font-family: 'Roboto', sans-serif;
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     color: black;
+
+     @media (max-width: 768px) {
+          grid-template-columns: 1fr;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          border-bottom: 1px solid #c7c7c7;
+     }
+`;
+
+const TransactionCol = styled.td`
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: ${props => props.textRight ? "right" : props.textLeft ? 'left' : "center" };
+    font-weight: ${props => props.bold ? "bold" : 'regular'};
+    @media (max-width: 768px) {
+          text-align: left;
+          padding-bottom: 10px;
+          padding-top: 10px;
+     }
+`;
+
+const TransactionAmount = styled.span`
+    color: ${props => props.highlight ? "#3ca9f5" : "inherit"};
+`;
+
+
 TransactionElement.propTypes = {
     transactionData: PropTypes.shape({
         category_title: PropTypes.string,
@@ -17,29 +49,6 @@ TransactionElement.propTypes = {
         })
     }).isRequired
 }
-  
-
-const TransactionRow = styled.tr`
-     font-family: 'Roboto', sans-serif;
-     display: grid;
-     grid-template-columns: repeat(4, 1fr);
-     color: #464646;
-`;
-
-const TransactionCol = styled.td`
-     text-align: ${props => props.textRight ? "right" : props.textLeft ? 'left' : "center" };
-`;
-
-const TransactionDate = styled.p`
-     text-align: center;
-`;
-
-const TransactionAmount = styled.span`
-    color: ${props => props.highlight ? "#3ca9f5" : "inherit"};
-    font-weight: bold;
-
-`;
-
 
 function TransactionElement({ transactionData }) {
      const ICON_NAMES = {
@@ -59,7 +68,7 @@ function TransactionElement({ transactionData }) {
           return false
      }
      
-      const makePositive = (number) => {
+     const makePositive = (number) => {
           return Math.abs(number)
      }
      
@@ -67,15 +76,11 @@ function TransactionElement({ transactionData }) {
 
      return (
           <TransactionRow data-testid="transaction">
-               <TransactionCol textLeft> {description} </TransactionCol>
+               <TransactionCol textLeft bold> {description} </TransactionCol>
                <TransactionCol> {category_title} </TransactionCol>
-               <TransactionCol>
-                    <TransactionDate>
-                         {date}
-                    </TransactionDate>
-               </TransactionCol>
+               <TransactionCol> {date} </TransactionCol>
                <TransactionCol textRight>
-                    {    isPositive(value)
+                    {isPositive(value)
                          ?    <TransactionAmount highlight>
                                    <FontAwesomeIcon icon={convertTextToIcon(currency_iso)} size="sm" /> {value}
                               </TransactionAmount>

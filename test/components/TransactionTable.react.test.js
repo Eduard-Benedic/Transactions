@@ -12,21 +12,16 @@ jest.mock('../../src/services/transaction.js')
 afterEach(cleanup)
 
 
-
-
 describe('TransactionTable Component', () => {
 
     test('Fetches transactions from API and renders them on mount', async () => {
-
         const { getAllByTestId } = render(<TransactionTable />)
-        
         await waitFor(() => {
             expect( getAllByTestId('transaction')).toHaveLength(2)
         })
     })
 
-    test('Filters the transactions from low to high', () => {
-
+    test('Filtering the transactions from low to high', () => {
         const fakeTransactions = {
             id: "0eb7acfd6fa3449676947c9521311cfce618bf9129ac5ac07ba30c76843e0f65fddb",
             provider: {
@@ -46,7 +41,7 @@ describe('TransactionTable Component', () => {
                     description: "Tesco",
                     category_title: "Groceries",
                     amount: {
-                        value: -57.21,
+                        value:510.55,
                         currency_iso: "GBP"
                     }
                 },
@@ -56,21 +51,22 @@ describe('TransactionTable Component', () => {
                     description: "Max Mustermann",
                     category_title: "Income",
                     amount: {
-                        value: 510.55,
+                        value: -57.21,
                         currency_iso: "GBP"
                     }
                 }
             ]
         };
 
- 
+        const transactionAmount = fakeTransactions.transactions.map((transaction) => {
+            const { amount: {value} } = transaction
+            return { amount: { value } }
+        })
 
-        // const transactionsAmountFiltered = filterTransactions( fakeTransactions.transactions)
-
-        // const fakeAmountsFiltered = transactionsAmountFiltered.map(t => t.amount.value)
-    
-
-        // expect(fakeAmountsFiltered).toEqual()
+        expect(filterTransactions(transactionAmount)).toEqual([
+            { amount: { value: -57.21 } },
+            { amount: { value: 510.55 } }]
+        );
     })
 
 })

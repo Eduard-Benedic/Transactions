@@ -1,10 +1,6 @@
-
 import React from 'react'
 import {render} from '@testing-library/react'
 import TransactionElement from '../../src/components/TransactionElement'
-
-
-
 
 
 describe('TransactionElement', () => {
@@ -27,19 +23,6 @@ describe('TransactionElement', () => {
         })
     })
 
-    test('TransactionAmount is highlighted when is positive', () => {
-        // To avoid :  Warning: validateDOMNesting(...): append the container to a tbody
-        const table = document.createElement('tbody')
-        const { container } = render(<TransactionElement transactionData={transactionData} />, {
-            container: document.body.appendChild(table)
-        })
-
-        const amountEl = container.querySelector('span');
-        const amountElementStyle = window.getComputedStyle(amountEl) 
-
-        expect(amountElementStyle.fontWeight).toBe('bold')
-        expect(amountElementStyle.color).toBe("rgb(60, 169, 245)")
-    })
 
     
 })

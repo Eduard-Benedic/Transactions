@@ -14,6 +14,8 @@ const GlobalStyle = createGlobalStyle`
     html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
+    width: 100%;
+    height: 100%;
     }
 
     /* Sections
@@ -25,7 +27,8 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: 'Roboto', sans-serif;
-    margin: 0;
+        margin: 0;
+        height: 100%;
     }
 
     
@@ -247,6 +250,21 @@ const GlobalStyle = createGlobalStyle`
 
     [hidden] {
     display: none;
+    }
+
+    ul {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+    }
+
+    #root {
+        height: 100%;
+    }
+
+    .App {
+        height: 100%;
     }
 `;
 
