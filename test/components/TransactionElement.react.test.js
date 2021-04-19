@@ -20,7 +20,7 @@ describe('TransactionElement', () => {
         }
     }
 
-    test('Mount TransactionElement and check inner functionality', () => {
+    test('Mount TransactionElement', () => {
         const table= document.createElement('tbody')
         render(<TransactionElement transactionData={transactionData} />, {
             container: document.body.appendChild(table)
@@ -28,7 +28,7 @@ describe('TransactionElement', () => {
     })
 
     test('TransactionAmount is highlighted when is positive', () => {
-        // To avoid :  Warning: validateDOMNesting(...): create the tablebody and append the tr to it
+        // To avoid :  Warning: validateDOMNesting(...): append the container to a tbody
         const table = document.createElement('tbody')
         const { container } = render(<TransactionElement transactionData={transactionData} />, {
             container: document.body.appendChild(table)

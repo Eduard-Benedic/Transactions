@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import GlobalStyle from './gloablStyles'
 import styled from 'styled-components'
 
 import TransactionTable from './components/TransactionTable'
@@ -22,12 +23,14 @@ const StyledBackground = styled.div`
 
 function App() {
      return (
-            <div className="App">
-                <StyledBackground>
+         <div className="App">
+                 <GlobalStyle />
+                 <StyledBackground>
                         <StyledWrapper>
                             <TransactionTable />
                         </StyledWrapper>
                 </StyledBackground>
+
             </div>
      );
 }
